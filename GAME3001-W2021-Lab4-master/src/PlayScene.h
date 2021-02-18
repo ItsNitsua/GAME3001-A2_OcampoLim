@@ -33,6 +33,11 @@ private:
 
 	Target* m_pTarget;
 	Ship* m_pShip;
+	Label* m_pInstructionLabel;
+	Label* m_pInstructionLabel2;
+
+	Obstacle* m_obstacle;
+	
 	// Pathfinding functions and objects
 	void m_buildGrid();
 	void m_computeTileCosts();

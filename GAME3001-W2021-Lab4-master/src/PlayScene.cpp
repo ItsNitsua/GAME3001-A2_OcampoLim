@@ -3,6 +3,8 @@
 #include "EventManager.h"
 
 // required for IMGUI
+
+
 #include "imgui.h"
 #include "imgui_sdl.h"
 #include "Renderer.h"
@@ -31,6 +33,8 @@ void PlayScene::draw()
 void PlayScene::update()
 {
 	updateDisplayList();
+
+	
 }
 
 void PlayScene::clean()
@@ -40,6 +44,7 @@ void PlayScene::clean()
 
 void PlayScene::handleEvents()
 {
+	
 	EventManager::Instance().update();
 
 	if (EventManager::Instance().isKeyDown(SDL_SCANCODE_ESCAPE))
@@ -56,13 +61,44 @@ void PlayScene::handleEvents()
 	{
 		TheGame::Instance()->changeSceneState(END_SCENE);
 	}
+
+	//Turn on the Grid
+	if (EventManager::Instance().isKeyDown(SDL_SCANCODE_H))
+	{
+		m_setGridEnabled(isEnabled());
+		//std::cout << "Grid drawn" << std::endl;
+	}
+
+	//Turn OFF the grid
+	else if (EventManager::Instance().isKeyDown(SDL_SCANCODE_J))
+	{
+		m_setGridEnabled(!isEnabled());
+	}
+
+
+	
+
+
 }
 
 void PlayScene::start()
 {
+	static bool isGridEnabled = false;
+	
+	
 	// Set GUI Title
 	m_guiTitle = "Play Scene";
 
+
+	//Print Instructions
+	const SDL_Color blue = { 69, 4, 20, 255 };
+	m_pInstructionLabel = new Label("Press H to turn on Grid", "Lazy", 30, blue, glm::vec2(200.0f, 60.0f));
+	addChild(m_pInstructionLabel);
+
+	m_pInstructionLabel2 = new Label("Press J to turn off Grid", "Lazy", 30, blue, glm::vec2(200.0f, 80.0f));
+	addChild(m_pInstructionLabel2);
+	
+	
 	m_buildGrid();
 	auto offset = glm::vec2(Config::TILE_SIZE * 0.5f, Config::TILE_SIZE * 0.5f);
 	currentHeuristic = EUCLIDEAN;
@@ -84,10 +120,23 @@ void PlayScene::start()
 	SoundManager::Instance().load("../Assets/audio/MarioPaint.ogg", "paint", SOUND_MUSIC);
 	SoundManager::Instance().setMusicVolume(1);
 	SoundManager::Instance().playMusic("paint", -1);
+
+	
+
+	//Draw the Obstacle
+	m_obstacle = new Obstacle();
+	m_obstacle->getTransform()->position = glm::vec2(400.0f, 300.0f);
+	addChild(m_obstacle);
+
+
+	
+
+	
 }
 
 void PlayScene::GUI_Function() 
 {
+
 	//TODO: We need to deal with this
 	auto offset = glm::vec2(Config::TILE_SIZE * 0.5f, Config::TILE_SIZE * 0.5f);
 	
@@ -99,12 +148,24 @@ void PlayScene::GUI_Function()
 	
 	ImGui::Begin("GAME3001 - Assignment 2", NULL, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_MenuBar);
 
-	static bool isGridEnabled = false;
-	if(ImGui::Checkbox("Grid Enabled", &isGridEnabled))
-	{
-		// toggle grid on/off
-		m_setGridEnabled(isGridEnabled);
-	}
+	//static bool isGridEnabled = false; //= false;
+	//if(ImGui::Checkbox("Grid Enabled", &isGridEnabled))
+	//{
+	//	// toggle grid on/off
+	//	m_setGridEnabled(isGridEnabled);
+	//}
+
+	//m_setGridEnabled(isGridEnabled);
+
+
+	//static bool isGridEnabled = false;
+	//if (EventManager::Instance().isKeyDown(SDL_SCANCODE_H))
+	//{
+
+	//	m_setGridEnabled(isGridEnabled);
+	//}
+
+	
 	ImGui::Separator();
 	auto radio = static_cast<int>(currentHeuristic);
 	ImGui::LabelText("", "Heuristic Type");
