@@ -111,14 +111,16 @@ void PlayScene::start()
 	m_pInstructionLabel2 = new Label("Press J to turn off Grid", "Lazy", 30, blue, glm::vec2(200.0f, 80.0f));
 	addChild(m_pInstructionLabel2);
 
-	m_pInstructionLabel3 = new Label("Press M to move ship", "Lazy", 30, blue, glm::vec2(200.0f, 100.0f));
+	m_pInstructionLabel3 = new Label("Press M to move player", "Lazy", 30, blue, glm::vec2(200.0f, 100.0f));
 	addChild(m_pInstructionLabel3);
 
-	m_pInstructionLabel4 = new Label("Press F to find shortest path", "Lazy", 30, blue, glm::vec2(200.0f, 120.0f));
+	m_pInstructionLabel4 = new Label("Press F to find shortest path", "Lazy", 30, blue, glm::vec2(250.0f, 120.0f));
 	addChild(m_pInstructionLabel4);
 	m_buildGrid();
 	auto offset = glm::vec2(Config::TILE_SIZE * 0.5f, Config::TILE_SIZE * 0.5f);
 	currentHeuristic = EUCLIDEAN;
+	
+	
 	//add ship to scene start point
 	m_pShip = new Ship();
 	m_pShip->getTransform()->position = m_getTile(2, 3)->getTransform()->position + offset;
@@ -464,6 +466,11 @@ void PlayScene::m_moveShip()
 		m_pShip->setGridPosition(m_pPathList[moveCounter]->getGridPosition().x, m_pPathList[moveCounter]->getGridPosition().y);
 		if (Game::Instance()->getFrames() % 20 == 0)
 		{
+			//Footstep music everytime the actor moves
+			SoundManager::Instance().load("../Assets/audio/footstep.wav", "footstep", SOUND_SFX);
+			//SoundManager::Instance().setMusicVolume(10);
+			SoundManager::Instance().playSound("footstep", 0);
+			SoundManager::Instance().setSoundVolume(8);
 			moveCounter++;
 		}
 	}
