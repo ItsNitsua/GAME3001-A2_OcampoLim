@@ -117,9 +117,9 @@ void PlayScene::start()
 
 	m_computeTileCosts();
 	m_guiTitle = "Play Scene";
-	SoundManager::Instance().load("../Assets/audio/MarioPaint.ogg", "paint", SOUND_MUSIC);
-	SoundManager::Instance().setMusicVolume(1);
-	SoundManager::Instance().playMusic("paint", -1);
+	SoundManager::Instance().load("../Assets/audio/dvalin.mp3", "dvalin", SOUND_MUSIC);
+	SoundManager::Instance().setMusicVolume(30);
+	SoundManager::Instance().playMusic("dvalin", -1);
 
 	
 
