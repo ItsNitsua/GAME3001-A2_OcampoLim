@@ -133,11 +133,11 @@ void PlayScene::start()
 	addChild(m_pTarget);
 
 	//Draw the Obstacle
-	m_obstacle = new Obstacle();
-	m_obstacle->getTransform()->position = m_getTile(10, 4)->getTransform()->position + offset;
-	m_obstacle->setGridPosition(10, 4);
-	m_getTile(10, 4)->setTileStatus(IMPASSABLE);
-	addChild(m_obstacle);
+	//m_obstacle = new Obstacle();
+	//m_obstacle->getTransform()->position = m_getTile(30, 5)->getTransform()->position + offset;
+	//m_obstacle->setGridPosition(10, 4);
+	//m_getTile(10, 4)->setTileStatus(IMPASSABLE);
+	//addChild(m_obstacle);
 	
 	m_computeTileCosts();
 	m_guiTitle = "Play Scene";
