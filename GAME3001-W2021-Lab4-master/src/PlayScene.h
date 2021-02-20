@@ -35,6 +35,11 @@ private:
 	Ship* m_pShip;
 	Label* m_pInstructionLabel;
 	Label* m_pInstructionLabel2;
+	Label* m_pInstructionLabel3;
+	Label* m_pInstructionLabel4;
+
+
+	bool m_isGridEnabled;
 
 	Obstacle* m_obstacle;
 	
@@ -44,9 +49,11 @@ private:
 	void m_findShortestPath();
 	void m_displayPathList();
 	void m_setGridEnabled(bool state);
+	bool m_getGridEnabled() const;
 	std::vector<Tile*> m_pGrid;
-
+	
 	// convenience functions
+	SDL_Rect m_pRect;
 	Tile* m_getTile(int col, int row);
 	Tile* m_getTile(glm::vec2 grid_postion);
 	//heruristic
@@ -57,7 +64,9 @@ private:
 	std::vector<Tile*> m_pClosedList;
 	std::vector<Tile*> m_pPathList;
 
-
+	void m_moveShip();
+	int moveCounter = 0;
+	bool m_shipIsMoving = false;
 };
 
 #endif /* defined (__PLAY_SCENE__) */

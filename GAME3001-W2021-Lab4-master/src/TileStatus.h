@@ -4,7 +4,7 @@
 
 enum TileStatus
 {
-	UNVISTED,
+	UNVISITED,
 	OPEN,
 	CLOSED,
 	IMPASSABLE,

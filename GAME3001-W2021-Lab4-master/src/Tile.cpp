@@ -66,7 +66,7 @@ void Tile::setTileStatus(const TileStatus status)
 	m_status = status;
 	switch(status)
 	{
-	case UNVISTED:
+	case UNVISITED:
 		m_statusLabel->setText("--");
 		break;
 	case OPEN:
