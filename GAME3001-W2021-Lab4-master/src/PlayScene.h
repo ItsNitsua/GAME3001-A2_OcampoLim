@@ -37,6 +37,7 @@ private:
 	Label* m_pInstructionLabel2;
 	Label* m_pInstructionLabel3;
 	Label* m_pInstructionLabel4;
+	Label* m_pInstructionLabel5;
 
 
 	bool m_isGridEnabled;

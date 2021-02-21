@@ -116,6 +116,9 @@ void PlayScene::start()
 
 	m_pInstructionLabel4 = new Label("Press F to find shortest path", "Lazy", 30, blue, glm::vec2(250.0f, 120.0f));
 	addChild(m_pInstructionLabel4);
+
+	m_pInstructionLabel5 = new Label("Press ~ to open up ImGUI", "Consolas", 30, blue, glm::vec2(250.0f, 500.0f));
+	addChild(m_pInstructionLabel5);
 	m_buildGrid();
 	auto offset = glm::vec2(Config::TILE_SIZE * 0.5f, Config::TILE_SIZE * 0.5f);
 	currentHeuristic = EUCLIDEAN;
